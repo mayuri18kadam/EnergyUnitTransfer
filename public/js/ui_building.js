@@ -84,7 +84,7 @@ function build_user_panels(data) {
 
 		console.log('[ui] building owner panel ' + data[i].id);
 
-		html += '<div id="user' + i + 'wrap" username="' + data[i].username + '" company="' + data[i].company +
+		/*html += '<div id="user' + i + 'none" username="' + data[i].username + '" company="' + data[i].company +
 			'" owner_id="' + data[i].id + '" class="marblesWrap ' + colorClass + '">';
 		html += '<div class="legend" style="' + size_user_name(data[i].username) + '">';
 		html += toTitleCase(data[i].username);
@@ -92,20 +92,35 @@ function build_user_panels(data) {
 		html += '</div>';
 		html += '<div class="innerMarbleWrap"><i class="fa fa-plus addMarble"></i></div>';
 		html += '<div class="noMarblesMsg hint">No marbles</div>';
-		html += '</div>';
+		html += '</div>';*/
 
 		// My code, adds user information to the table
 		var table = '';
 		table += '<tr id="user' + i + 'row" username="' + data[i].username + '" company="' + data[i].company +
 			'" owner_id="' + data[i].id + '">';
-		table += '<td>' + data[i].username + '</td><td>0</td></tr>' ;
+		table += '<td>' + data[i].username + '</td>';
+		table += '<td>';
+
+		table += '<div id="user' + i + 'wrap" username="' + data[i].username + '" company="' + data[i].company +
+			'" owner_id="' + data[i].id + '" class="marblesWrap ' + colorClass + '">';
+		table += '<div class="legend" style="' + size_user_name(data[i].username) + '">';
+		table += toTitleCase(data[i].username);
+		table += '<span class="fa fa-thumb-tack marblesCloseSectionPos marblesFix" title="Never Hide Owner"></span>';
+		table += '</div>';
+		table += '<div class="innerMarbleWrap"><i class="fa fa-plus addMarble"></i></div>';
+		table += '<div class="noMarblesMsg hint">No marbles</div>';
+		table += '</div>';
+
+		table +='</td>';
+
+		table += '</tr>' ;
 
 		$('.ownerTable').append(table);
 
 		//end of my code
 
 
-		$('.companyPanel[company="' + data[i].company + '"]').find('.ownerWrap').append(html);
+		$('.companyPanel[company="' + data[i].company + '"]').find('.ownerTable').append(html);
 		$('.companyPanel[company="' + data[i].company + '"]').find('.companyVisible').html(known_companies[data[i].company].visible);
 		$('.companyPanel[company="' + data[i].company + '"]').find('.companyCount').html(known_companies[data[i].company].count);
 	}

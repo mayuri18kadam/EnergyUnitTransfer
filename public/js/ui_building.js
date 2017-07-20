@@ -94,6 +94,17 @@ function build_user_panels(data) {
 		html += '<div class="noMarblesMsg hint">No marbles</div>';
 		html += '</div>';
 
+		// My code, adds user information to the table
+		var table = '';
+		table += '<tr id="user' + i + 'row" username="' + data[i].username + '" company="' + data[i].company +
+			'" owner_id="' + data[i].id + '">';
+		table += '<td>' + data[i].username + '</td><td>0</td></tr>' ;
+
+		$('.ownerTable').append(table);
+
+		//end of my code
+
+
 		$('.companyPanel[company="' + data[i].company + '"]').find('.ownerWrap').append(html);
 		$('.companyPanel[company="' + data[i].company + '"]').find('.companyVisible').html(known_companies[data[i].company].visible);
 		$('.companyPanel[company="' + data[i].company + '"]').find('.companyCount').html(known_companies[data[i].company].count);

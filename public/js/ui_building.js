@@ -162,7 +162,21 @@ function build_company_panel(company) {
 		html += '<span class="fa fa-long-arrow-left floatRight"></span>';
 	}
 	html += '</div>';
-	html += '<div class="ownerWrap"></div>';
+// My code starts here
+	html += '<div class="ownerWrap">';
+	html += '<table class="ownerTable" >';
+	html += '<tr colspan="2">';
+	html += '<th>' + company + '</th>';
+	html += '</tr>';
+
+	html += '<tr><th>Users</th><th>Excess</th></tr>'
+	html += '</table><br/>';
+
+	html += '</div>';
+
+
+
+// My code ends here
 	html += '</div>';
 	$('#allUserPanelsWrap').append(html);
 }

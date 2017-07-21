@@ -152,9 +152,9 @@ else {
 }
 // ------------------------------------------------------------------------------------------------------------------------------
 
-//setup marbles library and check if cc is deployed
+//setup energy units library and check if cc is deployed
 function setup_marbles_lib() {
-	logger.debug('Setup Marbles Lib...');
+	logger.debug('Setup energy units Lib...');
 
 	var opts = helper.makeMarblesLibOptions();
 	marbles_lib = require('./utils/marbles_cc_lib.js')(enrollObj, opts, fcw, logger);
@@ -238,7 +238,7 @@ function simple_hash(a_string) {
 	return hash;
 }
 
-// sanitise marble owner names
+// sanitise energy unit owner names
 function saferNames(usernames) {
 	var ret = [];
 	for (var i in usernames) {
@@ -248,15 +248,15 @@ function saferNames(usernames) {
 	return ret;
 }
 
-// create marbles and marble owners, owners first
+// create energy units and energy unit owners, owners first
 function create_assets(build_marbles_users) {
 	build_marbles_users = saferNames(build_marbles_users);
-	logger.info('Creating marble owners and marbles');
+	logger.info('Creating energy unit owners and energy units');
 	var owners = [];
 
 	if (build_marbles_users && build_marbles_users.length > 0) {
 		async.each(build_marbles_users, function (username, owner_cb) {
-			logger.debug('- creating marble owner: ', username);
+			logger.debug('- creating energy unit owner: ', username);
 
 			// --- Create Each User --- //
 			create_owners(0, username, function (errCode, resp) {
@@ -265,22 +265,22 @@ function create_assets(build_marbles_users) {
 			});
 
 		}, function (err) {
-			logger.info('finished creating owners, now for marbles');
+			logger.info('finished creating owners, now for energy units');
 			if (err == null) {
 
 				var marbles = [];
-				var marblesEach = 3;											//number of marbles each owner gets
+				var marblesEach = 3;											//number of energy units each owner gets
 				for (var i in owners) {
 					for (var x = 0; x < marblesEach; x++) {
 						marbles.push(owners[i]);
 					}
 				}
-				logger.debug('prepared marbles obj', marbles.length, marbles);
+				logger.debug('prepared energy units obj', marbles.length, marbles);
 
-				// --- Create Marbles--- //
+				// --- Create energy units--- //
 				async.each(marbles, function (owner_obj, marble_cb) { 			//iter through each one 
 					create_marbles(owner_obj.id, owner_obj.username, marble_cb);
-				}, function (err) {												//marble owner creation finished
+				}, function (err) {												//energy unit owner creation finished
 					logger.debug('- finished creating asset');
 					if (err == null) {
 						all_done();												//delay for peer catch up
@@ -290,12 +290,12 @@ function create_assets(build_marbles_users) {
 		});
 	}
 	else {
-		logger.debug('- there are no new marble owners to create');
+		logger.debug('- there are no new energy unit owners to create');
 		all_done();
 	}
 }
 
-//create the marble owner
+//create the energy unit owner
 function create_owners(attempt, username, cb) {
 	var options = {
 		peer_urls: [helper.getPeersUrl(0)],
@@ -307,7 +307,7 @@ function create_owners(attempt, username, cb) {
 	marbles_lib.register_owner(options, function (e, resp) {
 		if (e != null) {
 			console.log('');
-			logger.error('error creating the marble owner', e, resp);
+			logger.error('error creating the energy unit owner', e, resp);
 			cb(e, resp);
 		}
 		else {
@@ -316,11 +316,11 @@ function create_owners(attempt, username, cb) {
 	});
 }
 
-//create 1 marble
+//create 1 energy unit
 function create_marbles(owner_id, username, cb) {
 	var randOptions = build_marble_options(owner_id, username, process.env.marble_company);
 	console.log('');
-	logger.debug('[startup] going to create marble:', randOptions);
+	logger.debug('[startup] going to create energy unit:', randOptions);
 	var options = {
 		chaincode_id: helper.getChaincodeId(),
 		peer_urls: [helper.getPeersUrl(0)],
@@ -331,12 +331,12 @@ function create_marbles(owner_id, username, cb) {
 	});
 }
 
-//create random marble arguments (it is not important for it to be random, just more fun)
+//create random energy unit arguments (it is not important for it to be random, just more fun)
 function build_marble_options(id, username, company) {
 	var colors = ['white', 'green', 'blue', 'purple', 'red', 'pink', 'orange', 'black', 'yellow'];
 	var sizes = ['35', '16'];
 	var color_index = simple_hash(more_entropy + company) % colors.length;		//build a psudeo random index to pick a color
-	var size_index = getRandomInt(0, sizes.length);								//build a random size for this marble
+	var size_index = getRandomInt(0, sizes.length);								//build a random size for this energy unit
 	return {
 		color: colors[color_index],
 		size: sizes[size_index],
@@ -434,7 +434,7 @@ function setupWebSocket() {
 					});
 				}
 
-				//register marble owners
+				//register energy unit owners
 				else if (data.configure === 'register') {
 					create_assets(data.build_marble_owners);
 				}

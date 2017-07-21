@@ -29,7 +29,7 @@ $(document).on('ready', function() {
 		$('#step2').removeClass('stepFailed');
 	});
 
-	//register new marble owners
+	//register new energy unit owners
 	$('#registerOwners').click(function(){
 		var owners =  $('input[name="marbleOwners"]').val();
 		owners = owners.split(',');

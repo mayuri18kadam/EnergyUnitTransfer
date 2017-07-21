@@ -34,14 +34,14 @@ function connect_to_server() {
 
 	function onOpen(evt) {
 		console.log(wsTxt + ' CONNECTED');
-		addshow_notification(build_notification(false, 'Connected to Marbles application'), false);
+		addshow_notification(build_notification(false, 'Connected to energy units application'), false);
 		connected = true;
 	}
 
 	function onClose(evt) {
 		console.log(wsTxt + ' DISCONNECTED', evt);
 		connected = false;
-		addshow_notification(build_notification(true, 'Lost connection to Marbles application'), true);
+		addshow_notification(build_notification(true, 'Lost connection to energy units application'), true);
 		setTimeout(function () { connect(); }, 5000);					//try again one more time, server restarts are quick
 	}
 
@@ -49,7 +49,7 @@ function connect_to_server() {
 		try {
 			var msgObj = JSON.parse(msg.data);
 
-			//marbles
+			//energy units
 			if (msgObj.msg === 'everything') {
 				console.log(wsTxt + ' rec', msgObj.msg, msgObj);
 				clearTimeout(getEverythingWatchdog);
@@ -69,7 +69,7 @@ function connect_to_server() {
 				});
 			}
 
-			//marbles
+			//energy units
 			else if (msgObj.msg === 'users_marbles') {
 				console.log(wsTxt + ' rec', msgObj.msg, msgObj);
 				populate_users_marbles(msgObj);
@@ -90,7 +90,7 @@ function connect_to_server() {
 				}
 			}
 
-			//marble owners
+			//energy unit owners
 			else if (msgObj.msg === 'owners') {
 				console.log(wsTxt + ' rec', msgObj.msg, msgObj);
 				clearTimeout(getEverythingWatchdog);
@@ -109,7 +109,7 @@ function connect_to_server() {
 				}
 			}
 
-			//all marbles sent
+			//all energy units sent
 			else if (msgObj.msg === 'all_marbles_sent') {
 				console.log(wsTxt + ' rec', msgObj.msg, msgObj);
 				start_up = false;
@@ -206,7 +206,7 @@ function transfer_marble(marbleId, to_owner_id) {
 			owner_id: to_owner_id,
 			v: 1
 		};
-		console.log(wsTxt + ' sending transfer marble msg', obj);
+		console.log(wsTxt + ' sending transfer energy unit msg', obj);
 		ws.send(JSON.stringify(obj));
 		refreshHomePanel();
 	});
@@ -286,7 +286,7 @@ function get_everything_or_else(attempt) {
 	}, 5000 + getRandomInt(0, 10000));
 }
 
-//emtpy trash marble wrap
+//emtpy trash energy unit wrap
 function clear_trash() {
 	$('#trashbin .ball').fadeOut();
 	setTimeout(function () {

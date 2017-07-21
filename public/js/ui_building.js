@@ -8,7 +8,7 @@ var marbles = {};
 // =================================================================================
 //	UI Building
 // =================================================================================
-//build a marble
+//build a energy unit
 function build_marble(marble) {
 	var html = '';
 	var colorClass = '';
@@ -38,11 +38,11 @@ function build_marble(marble) {
 	return html;
 }
 
-//redraw the user's marbles
+//redraw the user's energy units
 function populate_users_marbles(msg) {
 
 	//reset
-	console.log('[ui] clearing marbles for user ' + msg.owner_id);
+	console.log('[ui] clearing energy units for user ' + msg.owner_id);
 	$('.marblesWrap[owner_id="' + msg.owner_id + '"]').find('.innerMarbleWrap').html('<i class="fa fa-plus addMarble"></i>');
 	$('.marblesWrap[owner_id="' + msg.owner_id + '"]').find('.noMarblesMsg').show();
 
@@ -91,7 +91,7 @@ function build_user_panels(data) {
 		html += '<span class="fa fa-thumb-tack marblesCloseSectionPos marblesFix" title="Never Hide Owner"></span>';
 		html += '</div>';
 		html += '<div class="innerMarbleWrap"><i class="fa fa-plus addMarble"></i></div>';
-		html += '<div class="noMarblesMsg hint">No marbles</div>';
+		html += '<div class="noMarblesMsg hint">No energy units</div>';
 		html += '</div>';
 
 		$('.companyPanel[company="' + data[i].company + '"]').find('.ownerWrap').append(html);
@@ -99,16 +99,16 @@ function build_user_panels(data) {
 		$('.companyPanel[company="' + data[i].company + '"]').find('.companyCount').html(known_companies[data[i].company].count);
 	}
 
-	//drag and drop marble
+	//drag and drop energy unit
 	$('.innerMarbleWrap').sortable({ connectWith: '.innerMarbleWrap', items: 'span' }).disableSelection();
 	$('.innerMarbleWrap').droppable({
 		drop:
 		function (event, ui) {
 			var marble_id = $(ui.draggable).attr('id');
 
-			//  ------------ Delete Marble ------------ //
+			//  ------------ Delete energy unit ------------ //
 			if ($(event.target).attr('id') === 'trashbin') {
-				console.log('removing marble', marble_id);
+				console.log('removing energy unit', marble_id);
 				show_tx_step({ state: 'building_proposal' }, function () {
 					var obj = {
 						type: 'delete_marble',
@@ -121,13 +121,13 @@ function build_user_panels(data) {
 				});
 			}
 
-			//  ------------ Transfer Marble ------------ //
+			//  ------------ Transfer energy unit ------------ //
 			else {
 				var dragged_owner_id = $(ui.draggable).attr('owner_id');
 				var dropped_owner_id = $(event.target).parents('.marblesWrap').attr('owner_id');
 
-				console.log('dropped a marble', dragged_owner_id, dropped_owner_id);
-				if (dragged_owner_id != dropped_owner_id) {										//only transfer marbles that changed owners
+				console.log('dropped a energy unit', dragged_owner_id, dropped_owner_id);
+				if (dragged_owner_id != dropped_owner_id) {										//only transfer energy units that changed owners
 					$(ui.draggable).addClass('invalid bounce');
 					transfer_marble(marble_id, dropped_owner_id);
 					return true;

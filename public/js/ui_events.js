@@ -27,7 +27,7 @@ $(document).on('ready', function () {
 	// jQuery UI Events
 	// =================================================================================
 	$('#createMarbleButton').click(function () {
-		console.log('creating marble');
+		console.log('creating energy unit');
 		var obj = {
 			type: 'create',
 			color: $('.colorSelected').attr('color'),
@@ -37,7 +37,7 @@ $(document).on('ready', function () {
 			owner_id: $('input[name="owner_id"]').val(),
 			v: 1
 		};
-		console.log('creating marble, sending', obj);
+		console.log('creating energy unit, sending', obj);
 		$('#createPanel').fadeOut();
 		$('#tint').fadeOut();
 
@@ -53,7 +53,7 @@ $(document).on('ready', function () {
 		return false;
 	});
 
-	//fix marble owner panel (don't filter/hide it)
+	//fix energy unit owner panel (don't filter/hide it)
 	$(document).on('click', '.marblesFix', function () {
 		if ($(this).parent().parent().hasClass('marblesFixed')) {
 			$(this).parent().parent().removeClass('marblesFixed');
@@ -63,7 +63,7 @@ $(document).on('ready', function () {
 		}
 	});
 
-	//marble color picker
+	//energy unit color picker
 	$(document).on('click', '.colorInput', function () {
 		$('.colorOptionsWrap').hide();											//hide any others
 		$(this).parent().find('.colorOptionsWrap').show();
@@ -103,7 +103,7 @@ $(document).on('ready', function () {
 			console.log('searching on', parts);
 
 			//figure out if the user matches the search
-			$('.marblesWrap').each(function () {												//iter on each marble user wrap
+			$('.marblesWrap').each(function () {												//iter on each energy unit user wrap
 				var username = $(this).attr('username');
 				var company = $(this).attr('company');
 				if (username && company) {
@@ -153,7 +153,7 @@ $(document).on('ready', function () {
 		}
 	});
 
-	//open create marble panel
+	//open create energy unit panel
 	$(document).on('click', '.addMarble', function () {
 		$('#tint').fadeIn();
 		$('#createPanel').fadeIn();
@@ -165,7 +165,7 @@ $(document).on('ready', function () {
 		$('input[name="owner_id"]').val(owner_id);
 	});
 
-	//close create marble panel
+	//close create energy unit panel
 	$('#tint').click(function () {
 		if ($('#startUpPanel').is(':visible')) return;
 		if ($('#txStoryPanel').is(':visible')) return;
@@ -208,20 +208,20 @@ $(document).on('ready', function () {
 		$('#createPanel, #tint').fadeOut();
 	});
 
-	//change size of marble
+	//change size of energy unit
 	$('select[name="size"]').click(function () {
 		var size = $(this).val();
 		if (size === '16') $('.createball').animate({ 'height': 150, 'width': 150 }, { duration: 200 });
 		else $('.createball').animate({ 'height': 250, 'width': 250 }, { duration: 200 });
 	});
 
-	//right click opens audit on marble
+	//right click opens audit on energy unit
 	$(document).on('contextmenu', '.ball', function () {
 		auditMarble(this, true);
 		return false;
 	});
 
-	//left click audits marble
+	//left click audits energy unit
 	$(document).on('click', '.ball', function () {
 		auditMarble(this, false);
 	});
@@ -230,13 +230,13 @@ $(document).on('ready', function () {
 		var marble_id = $(that).attr('id');
 		$('.auditingMarble').removeClass('auditingMarble');
 
-		if (!auditingMarble || marbles[marble_id].id != auditingMarble.id) {//different marble than before!
+		if (!auditingMarble || marbles[marble_id].id != auditingMarble.id) {//different energy unit than before!
 			for (var x in pendingTxDrawing) clearTimeout(pendingTxDrawing[x]);
 			$('.txHistoryWrap').html('');										//clear
 		}
 
 		auditingMarble = marbles[marble_id];
-		console.log('\nuser clicked on marble', marble_id);
+		console.log('\nuser clicked on energy unit', marble_id);
 
 		if (open || $('#auditContentWrap').is(':visible')) {
 			$(that).addClass('auditingMarble');
@@ -262,7 +262,7 @@ $(document).on('ready', function () {
 		$('.auditingMarble').removeClass('auditingMarble');												//reset
 		for (var x in pendingTxDrawing) clearTimeout(pendingTxDrawing[x]);
 		setTimeout(function () {
-			$('.txHistoryWrap').html('<div class="auditHint">Click a Marble to Audit Its Transactions</div>');//clear
+			$('.txHistoryWrap').html('<div class="auditHint">Click a energy unit to Audit Its Transactions</div>');//clear
 		}, 750);
 		$('#marbleId').html('-');
 		auditingMarble = null;

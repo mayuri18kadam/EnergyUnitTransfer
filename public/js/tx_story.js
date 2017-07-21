@@ -146,7 +146,8 @@ function reset(){
 	$('#commitBoxStable span').removeClass('fa-check').removeClass('fa-close').addClass('fa-search');
 }
 
-//1. animate borders to join marble in center
+//1. animate borders to join energy unit in center
+
 function story1_animation(cb){
 	var dist = 50;
 	$('#marbleBorderTop, #marbleBorderBottom, #marbleBorderLeft, #marbleBorderRight').show();
@@ -159,10 +160,11 @@ function story1_animation(cb){
 	$('#marbleBorderRight').animate({left: '-=' + dist}, {duration: 800});
 }
 
-//1. show marble that will roll
+//1. show energy unit that will roll
 //2. roll it
-//3. hide rolled marble
-//4. show endorse marble with (icon hidden)
+//3. hide rolled energy unit
+//4. show endorse energy unit with (icon hidden)
+
 function story2_animation(cb){
 	$('#proposeMarble').show();
 	$('#proposeMarbleStable').removeClass('hideBorders');
@@ -179,11 +181,12 @@ function story2_animation(cb){
 	});
 }
 
-//1. show the marble that will roll
-//2. roll endorsed marble
-//3. show orderer marbles
-//4. hide rolled marble
-//5. build box around marbles
+//1. show the energy unit that will roll
+//2. roll endorsed energy unit
+//3. show orderer energy units
+//4. hide rolled energy unit
+//5. build box around energy units
+
 function story3_animation(cb){
 	$('#endorseMarbleStable span').fadeIn();
 	$('#endorseMarble').show();
@@ -208,10 +211,11 @@ function story3_animation(cb){
 	});
 }
 
-//1. fade in solid box around marbles
+//1. fade in solid box around energy units
 //2. animate it right
 //3. fade in stable box
 //4. hide box we moved
+
 function story4_animation(cb){
 	var dist3 = $('#txStep3 .txStatusWrap .txStatus').offset();
 	var dist4 = $('#txStep4 .txStatusWrap .txStatus').offset();

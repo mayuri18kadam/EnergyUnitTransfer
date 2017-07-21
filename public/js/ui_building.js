@@ -156,6 +156,12 @@ function build_user_panels(data) {
 				if (dragged_owner_id != dropped_owner_id) {										//only transfer energy units that changed owners
 					$(ui.draggable).addClass('invalid bounce');
 					transfer_marble(marble_id, dropped_owner_id);
+					var obj = {
+						type: 'delete_marble',
+						id: marble_id,
+						v: 1
+					};
+					ws.send(JSON.stringify(obj));
 					return true;
 				}
 			}

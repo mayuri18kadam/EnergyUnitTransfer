@@ -43,6 +43,7 @@ gulp.task('default', ['watch-sass', 'watch-server', 'server']);
 gulp.task('marbles1', ['start_marbles1', 'watch-sass', 'watch-server', 'server']);	//run with command `gulp marbles1` [THIS ONE!]
 gulp.task('marbles2', ['start_marbles2', 'watch-sass', 'watch-server', 'server']);	//run with command `gulp marbles2`
 gulp.task('marbles3', ['start_marbles3', 'watch-sass', 'watch-server', 'server']);	//run with command `gulp marbles3`
+gulp.task('Energy', ['start_Energy', 'watch-sass', 'watch-server', 'server']);	//run with command `gulp marbles3`
 
 
 // launch marbles 1
@@ -60,5 +61,11 @@ gulp.task('start_marbles2', function () {
 // launch marbles 3 - Docker Compose version
 gulp.task('start_marbles3', function () {
 	env['creds_filename'] = 'marbles3.json';
+	console.log('\n[International Marbles Trading Consortium] 1\n');
+});
+
+// launch marbles 3 - Docker Compose version
+gulp.task('start_Energy', function () {
+	env['creds_filename'] = 'Energy.json';
 	console.log('\n[International Marbles Trading Consortium] 1\n');
 });

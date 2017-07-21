@@ -236,27 +236,27 @@ module.exports = function (config_filename, logger) {
 		return ret;
 	};
 
-	// get the marble owner names
+	// get the energy unit owner names
 	helper.getMarbleUsernames = function () {
 		return getMarblesField('usernames');
 	};
 
-	// get the marbles trading company name
+	// get the energy units trading company name
 	helper.getCompanyName = function () {
 		return getMarblesField('company');
 	};
 
-	// get the marble's server port number
+	// get the energy unit's server port number
 	helper.getMarblesPort = function () {
 		return getMarblesField('port');
 	};
 
-	// get the status of marbles previous startup
+	// get the status of energy units previous startup
 	helper.getMarbleStartUpHash = function () {
 		return getMarblesField('last_startup_hash');
 	};
 
-	// get the status of marbles previous startup
+	// get the status of energy units previous startup
 	helper.getEventsSetting = function () {
 		if (helper.config['use_events']) {
 			return helper.config['use_events'];
@@ -271,7 +271,7 @@ module.exports = function (config_filename, logger) {
 		return (sec * 1000);
 	};
 
-	// build the marbles lib module options
+	// build the energy units lib module options
 	helper.makeMarblesLibOptions = function () {
 		return {
 			block_delay: helper.getBlockDelay(),
@@ -307,7 +307,7 @@ module.exports = function (config_filename, logger) {
 		}
 	};
 
-	// safely retrieve marbles fields
+	// safely retrieve energy units fields
 	function getMarblesField(marbles_field) {
 		try {
 			if (helper.config[marbles_field]) {
@@ -405,7 +405,7 @@ module.exports = function (config_filename, logger) {
 		}
 	};
 
-	// check if marbles UI and marbles chaincode work together
+	// check if energy units UI and energy units chaincode work together
 	helper.errorWithVersions = function (v) {
 		var version = packagejson.version;
 		if (!v || !v.parsed) v = { parsed: '3.x.x' };		//default
@@ -414,7 +414,7 @@ module.exports = function (config_filename, logger) {
 			logger.warn('---------------------------------------------------------------');
 			logger.warn('----------------------------- Ah! -----------------------------');
 			logger.warn('---------------------------------------------------------------');
-			logger.error('Looks like you are using an old version of marbles chaincode: v' + v.parsed);
+			logger.error('Looks like you are using an old version of energy units chaincode: v' + v.parsed);
 			logger.warn('This UI is expecting chaincode version: v' + version[0] + '.x.x');
 			logger.warn('Install and instantiate v' + version[0] + '.x.x' + ' chaincode on channel ' + helper.getChannelId());
 			logger.warn('----------------------------------------------------------------------');

@@ -27,7 +27,7 @@ module.exports = function (g_options, fcw, logger) {
 				logger.error('could not enroll');
 			} else {
 
-				// ---- Pass Chain Obj to Marbles Lib ----- //
+				// ---- Pass Chain Obj to energy units Lib ----- //
 				var opts = helper.makeMarblesLibOptions();
 				marbles_lib = require(path.join(__dirname, './marbles_cc_lib.js'))(enrollObj, opts, fcw, logger);
 
@@ -53,13 +53,13 @@ module.exports = function (g_options, fcw, logger) {
 			ordered_hook: orderer_hook
 		};
 		if (marbles_lib === null) {
-			logger.error('marbles lib is null...');				//can't run in this state
+			logger.error('energy units lib is null...');				//can't run in this state
 			return;
 		}
 
-		// create a new marble
+		// create a new energy unit
 		if (data.type === 'create') {
-			logger.info('[ws] create marbles req');
+			logger.info('[ws] create energy units req');
 			options.args = {
 				color: data.color,
 				size: data.size,
@@ -75,7 +75,7 @@ module.exports = function (g_options, fcw, logger) {
 			});
 		}
 
-		// transfer a marble
+		// transfer a energy unit
 		else if (data.type === 'transfer_marble') {
 			logger.info('[ws] transfering req');
 			options.args = {
@@ -90,9 +90,9 @@ module.exports = function (g_options, fcw, logger) {
 			});
 		}
 
-		// delete marble
+		// delete energy unit
 		else if (data.type === 'delete_marble') {
-			logger.info('[ws] delete marble req');
+			logger.info('[ws] delete energy unit req');
 			options.args = {
 				marble_id: data.id,
 				auth_company: process.env.marble_company
@@ -104,13 +104,13 @@ module.exports = function (g_options, fcw, logger) {
 			});
 		}
 
-		// get all owners, marbles, & companies
+		// get all owners, energy units, & companies
 		else if (data.type === 'read_everything') {
 			logger.info('[ws] read everything req');
 			ws_server.check_for_updates(ws);
 		}
 
-		// get history of marble
+		// get history of energy unit
 		else if (data.type === 'audit') {
 			if (data.marble_id) {
 				logger.info('[ws] audit history');
@@ -220,7 +220,7 @@ module.exports = function (g_options, fcw, logger) {
 		});
 	};
 
-	// read complete state of marble world
+	// read complete state of energy unit world
 	function read_everything(ws_client, cb) {
 		var options = {
 			peer_urls: [helper.getPeersUrl(0)],
@@ -243,7 +243,7 @@ module.exports = function (g_options, fcw, logger) {
 				if (data && data.owners && data.marbles) {
 					console.log('');
 					logger.debug('[checking] number of owners:', data.owners.length);
-					logger.debug('[checking] number of marbles:', data.marbles.length);
+					logger.debug('[checking] number of energy units:', data.marbles.length);
 				}
 
 				data.owners = organize_usernames(data.owners);
@@ -268,7 +268,7 @@ module.exports = function (g_options, fcw, logger) {
 		});
 	}
 
-	// organize the marble owner list
+	// organize the energy unit owner list
 	function organize_usernames(data) {
 		var ownerList = [];
 		var myUsers = [];

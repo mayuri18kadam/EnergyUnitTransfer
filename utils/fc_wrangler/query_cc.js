@@ -7,7 +7,7 @@ module.exports = function (logger) {
 	var query_cc = {};
 
 	//-------------------------------------------------------------------
-	// Get Marble Index List
+	// Get energy unit Index List
 	//-------------------------------------------------------------------
 	/*
 		options: {

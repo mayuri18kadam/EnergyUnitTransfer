@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------
-// Marbles Chaincode Library
+// energy units Chaincode Library
 //-------------------------------------------------------------------
 
 module.exports = function (enrollObj, g_options, fcw, logger) {
@@ -62,12 +62,12 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 	};
 
 
-	// Marbles -------------------------------------------------------------------------------
+	// energy units -------------------------------------------------------------------------------
 
-	//create a marble
+	//create a energy unit
 	marbles_chaincode.create_a_marble = function (options, cb) {
 		console.log('');
-		logger.info('Creating a marble...');
+		logger.info('Creating a energy unit...');
 
 		var opts = {
 			channel_id: g_options.channel_id,
@@ -89,16 +89,16 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 		fcw.invoke_chaincode(enrollObj, opts, function (err, resp) {
 			if (cb) {
 				if(!resp) resp = {};
-				resp.id = opts.cc_args[0];			//pass marble id back
+				resp.id = opts.cc_args[0];			//pass energy unit id back
 				cb(err, resp);
 			}
 		});
 	};
 
-	//get list of marbles
+	//get list of energy units
 	marbles_chaincode.get_marble_list = function (options, cb) {
 		console.log('');
-		logger.info('Fetching marble index list...');
+		logger.info('Fetching energy unit index list...');
 
 		var opts = {
 			channel_id: g_options.channel_id,
@@ -110,9 +110,9 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 		fcw.query_chaincode(enrollObj, opts, cb);
 	};
 
-	//get marble
+	//get energy unit
 	marbles_chaincode.get_marble = function (options, cb) {
-		logger.info('fetching marble ' + options.marble_id + ' list...');
+		logger.info('fetching energy unit ' + options.marble_id + ' list...');
 
 		var opts = {
 			channel_id: g_options.channel_id,
@@ -124,10 +124,10 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 		fcw.query_chaincode(enrollObj, opts, cb);
 	};
 
-	//set marble owner
+	//set energy unit owner
 	marbles_chaincode.set_marble_owner = function (options, cb) {
 		console.log('');
-		logger.info('Setting marble owner...');
+		logger.info('Setting energy unit owner...');
 
 		var opts = {
 			channel_id: g_options.channel_id,
@@ -147,10 +147,10 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 		fcw.invoke_chaincode(enrollObj, opts, cb);
 	};
 
-	//delete marble
+	//delete energy unit
 	marbles_chaincode.delete_marble = function (options, cb) {
 		console.log('');
-		logger.info('Deleting a marble...');
+		logger.info('Deleting a energy unit...');
 
 		var opts = {
 			channel_id: g_options.channel_id,
@@ -183,9 +183,9 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 		fcw.query_chaincode(enrollObj, opts, cb);
 	};
 
-	//get multiple marbles/owners by start and stop ids
+	//get multiple energy units/owners by start and stop ids
 	marbles_chaincode.get_multiple_keys = function (options, cb) {
-		logger.info('Getting marbles between ids', options.args);
+		logger.info('Getting energy units between ids', options.args);
 
 		var opts = {
 			channel_id: g_options.channel_id,
@@ -206,7 +206,7 @@ module.exports = function (enrollObj, g_options, fcw, logger) {
 	//register a owner/user
 	marbles_chaincode.register_owner = function (options, cb) {
 		console.log('');
-		logger.info('Creating a marble owner...');
+		logger.info('Creating a energy unit owner...');
 
 		var opts = {
 			channel_id: g_options.channel_id,

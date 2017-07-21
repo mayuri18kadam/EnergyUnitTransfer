@@ -66,7 +66,7 @@ function build_user_panels(data) {
 
 	//reset
 	console.log('[ui] clearing all user panels');
-	$('.ownerWrap').html('');
+	$('.ownerTable').html('');
 	for (var x in known_companies) {
 		known_companies[x].count = 0;
 		known_companies[x].visible = 0;							//reset visible counts
@@ -115,12 +115,12 @@ function build_user_panels(data) {
 
 		table += '</tr>' ;
 
-		$('.ownerTable').append(table);
+		//$('.ownerTable').append(table);
 
 		//end of my code
 
 
-		$('.companyPanel[company="' + data[i].company + '"]').find('.ownerTable').append(html);
+		$('.companyPanel[company="' + data[i].company + '"]').find('.ownerTable').append(table);
 		$('.companyPanel[company="' + data[i].company + '"]').find('.companyVisible').html(known_companies[data[i].company].visible);
 		$('.companyPanel[company="' + data[i].company + '"]').find('.companyCount').html(known_companies[data[i].company].count);
 	}
@@ -179,6 +179,13 @@ function build_company_panel(company) {
 	html += '<div class="companyPanel" company="' + company + '">';
 	html += '<div class="companyNameWrap ' + mycss + '">';
 	html += '<span class="companyName">' + company + '&nbsp;-&nbsp;</span>';
+	html += '<table class="ownerTable" >';
+	html += '<tr colspan="2">';
+	html += '<th>' + company + '</th>';
+	html += '</tr>';
+
+	html += '<tr><th>Users</th><th>Excess</th></tr>'
+	html += '</table><br/>';
 	html += '<span class="companyVisible">0</span>/';
 	html += '<span class="companyCount">0</span>';
 	if (company === escapeHtml(bag.marble_company)) {
@@ -190,13 +197,7 @@ function build_company_panel(company) {
 	html += '</div>';
 // My code starts here
 	html += '<div class="ownerWrap">';
-	html += '<table class="ownerTable" >';
-	html += '<tr colspan="2">';
-	html += '<th>' + company + '</th>';
-	html += '</tr>';
 
-	html += '<tr><th>Users</th><th>Excess</th></tr>'
-	html += '</table><br/>';
 
 	html += '</div>';
 

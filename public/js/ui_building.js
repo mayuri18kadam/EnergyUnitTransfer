@@ -12,11 +12,11 @@ var marbles = {};
 function build_marble(marble) {
 	var html = '';
 	var colorClass = '';
-	var size = 'largeMarble';
+	var size = 'smallMarble';
 	var auditing = '';
 
 	marbles[marble.id] = marble;
-
+	marble.size = 'smallMarble';
 	marble.id = escapeHtml(marble.id);
 	marble.color = escapeHtml(marble.color);
 	marble.owner.id = escapeHtml(marble.owner.id);
@@ -31,7 +31,7 @@ function build_marble(marble) {
 	if(auditingMarble && marble.id ===  auditingMarble.id) auditing = 'auditingMarble';
 
 	html += '<span id="' + marble.id + '" class="ball ' + size + ' ' + colorClass + ' ' + auditing + ' title="' + marble.id + '"';
-	html += ' username="' + marble.owner.username + '" company="' + marble.owner.company + '" owner_id="' + marble.owner.id + '"></span>';
+	html += ' username="' + marble.owner.username + '" company="' + marble.owner.company + '" owner_id="' + marble.owner.id + '"><img src="http://hddfhm.com/images/animated-bolt-of-lightning-clipart-4.gif" alt="Smiley face" width="42" height="42"></span>';
 
 	$('.marblesWrap[owner_id="' + marble.owner.id + '"]').find('.innerMarbleWrap').prepend(html);
 	$('.marblesWrap[owner_id="' + marble.owner.id + '"]').find('.noMarblesMsg').hide();

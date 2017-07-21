@@ -66,14 +66,14 @@ func write(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 }
 
 // ============================================================================================================================
-// delete_marble() - remove a marble from state and from marble index
+// delete_marble() - remove a energy unit from state and from energy unit index
 // 
 // Shows Off DelState() - "removing"" a key/value from the ledger
 //
 // Inputs - Array of strings
 //      0      ,         1
 //     id      ,  authed_by_company
-// "m999999999", "united marbles"
+// "m999999999", "Energy Unit Systems"
 // ============================================================================================================================
 func delete_marble(stub shim.ChaincodeStubInterface, args []string) (pb.Response) {
 	fmt.Println("starting delete_marble")
@@ -91,10 +91,10 @@ func delete_marble(stub shim.ChaincodeStubInterface, args []string) (pb.Response
 	id := args[0]
 	authed_by_company := args[1]
 
-	// get the marble
+	// get the energy unit
 	marble, err := get_marble(stub, id)
 	if err != nil{
-		fmt.Println("Failed to find marble by id " + id)
+		fmt.Println("Failed to find energy unit by id " + id)
 		return shim.Error(err.Error())
 	}
 
@@ -103,7 +103,7 @@ func delete_marble(stub shim.ChaincodeStubInterface, args []string) (pb.Response
 		return shim.Error("The company '" + authed_by_company + "' cannot authorize deletion for '" + marble.Owner.Company + "'.")
 	}
 
-	// remove the marble
+	// remove the energy unit
 	err = stub.DelState(id)                                                 //remove the key from chaincode state
 	if err != nil {
 		return shim.Error("Failed to delete state")
@@ -114,18 +114,18 @@ func delete_marble(stub shim.ChaincodeStubInterface, args []string) (pb.Response
 }
 
 // ============================================================================================================================
-// Init Marble - create a new marble, store into chaincode state
+// Init energy unit - create a new energy unit, store into chaincode state
 //
 // Shows off building a key's JSON value manually
 //
 // Inputs - Array of strings
 //      0      ,    1  ,  2  ,      3          ,       4
 //     id      ,  color, size,     owner id    ,  authing company
-// "m999999999", "blue", "35", "o9999999999999", "united marbles"
+// "m999999999", "blue", "35", "o9999999999999", "Energy Unit Systems"
 // ============================================================================================================================
 func init_marble(stub shim.ChaincodeStubInterface, args []string) (pb.Response) {
 	var err error
-	fmt.Println("starting init_marble")
+	fmt.Println("starting init_energy unit")
 
 	if len(args) != 5 {
 		return shim.Error("Incorrect number of arguments. Expecting 5")
@@ -158,15 +158,15 @@ func init_marble(stub shim.ChaincodeStubInterface, args []string) (pb.Response) 
 		return shim.Error("The company '" + authed_by_company + "' cannot authorize creation for '" + owner.Company + "'.")
 	}
 
-	//check if marble id already exists
+	//check if energy unit id already exists
 	marble, err := get_marble(stub, id)
 	if err == nil {
-		fmt.Println("This marble already exists - " + id)
+		fmt.Println("This energy unit already exists - " + id)
 		fmt.Println(marble)
-		return shim.Error("This marble already exists - " + id)  //all stop a marble by this id exists
+		return shim.Error("This energy unit already exists - " + id)  //all stop a energy unit by this id exists
 	}
 
-	//build the marble json string manually
+	//build the energy unit json string manually
 	str := `{
 		"docType":"marble", 
 		"id": "` + id + `", 
@@ -178,7 +178,7 @@ func init_marble(stub shim.ChaincodeStubInterface, args []string) (pb.Response) 
 			"company": "` + owner.Company + `"
 		}
 	}`
-	err = stub.PutState(id, []byte(str))                         //store marble with id as key
+	err = stub.PutState(id, []byte(str))                         //store energy unit with id as key
 	if err != nil {
 		return shim.Error(err.Error())
 	}

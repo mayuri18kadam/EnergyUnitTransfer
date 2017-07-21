@@ -50,7 +50,7 @@ router.route('/').get(function (req, res) {
 // Login
 // ============================================================================================================================
 router.route('/login').get(function (req, res) {
-	res.render('login', { title: 'Marbles - Login', bag: build_bag(req) });
+	res.render('login', { title: 'Energy Unit System - Login', bag: build_bag(req) });
 });
 
 router.route('/login').post(function (req, res) {
@@ -80,7 +80,7 @@ function route_me(req, res) {
 		res.redirect('/login');
 	}
 	else {
-		res.render('marbles', { title: 'Marbles - Home', bag: build_bag(req) });
+		res.render('marbles', { title: 'Energy Unit System - Home', bag: build_bag(req) });
 	}
 }
 

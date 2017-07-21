@@ -2,11 +2,11 @@
 	"cred_filename": "blockchain_creds2.json",
 	"use_events": true,
 	"keep_alive_secs": 120,
-	"company": "eMarbles",
+	"company": "Energy Unit Systems",
 	"usernames": [
-		"cliff",
-		"cody",
-		"chuck"
+		"House 4",
+        "House 5",
+        "House 6"
 	],
 	"port": 3002,
 	"last_startup_hash": "380c2263aab82a818586b5abaaf96dfd1cdd25be"

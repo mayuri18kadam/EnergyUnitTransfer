@@ -32,15 +32,15 @@ type SimpleChaincode struct {
 }
 
 // ============================================================================================================================
-// Asset Definitions - The ledger will store marbles and owners
+// Asset Definitions - The ledger will store energy units and owners
 // ============================================================================================================================
 
-// ----- Marbles ----- //
+// ----- energy units ----- //
 type Marble struct {
 	ObjectType string        `json:"docType"` //field for couchdb
 	Id       string          `json:"id"`      //the fieldtags are needed to keep case from bouncing around
 	Color      string        `json:"color"`
-	Size       int           `json:"size"`    //size in mm of marble
+	Size       int           `json:"size"`    //size in KWH of energy unit
 	Owner      OwnerRelation `json:"owner"`
 }
 
@@ -70,10 +70,10 @@ func main() {
 
 
 // ============================================================================================================================
-// Init - initialize the chaincode - marbles don’t need anything initlization, so let's run a dead simple test instead
+// Init - initialize the chaincode - energy units don’t need anything initlization, so let's run a dead simple test instead
 // ============================================================================================================================
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
-	fmt.Println("Marbles Is Starting Up")
+	fmt.Println("energy units are Starting Up")
 	_, args := stub.GetFunctionAndParameters()
 	var Aval int
 	var err error
@@ -88,7 +88,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 		return shim.Error("Expecting a numeric string argument to Init()")
 	}
 
-	// store compaitible marbles application version
+	// store compaitible energy units application version
 	err = stub.PutState("marbles_ui", []byte("3.5.0"))
 	if err != nil {
 		return shim.Error(err.Error())
@@ -120,19 +120,19 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 		return read(stub, args)
 	} else if function == "write" {            //generic writes to ledger
 		return write(stub, args)
-	} else if function == "delete_marble" {    //deletes a marble from state
+	} else if function == "delete_marble" {    //deletes a energy unit from state
 		return delete_marble(stub, args)
-	} else if function == "init_marble" {      //create a new marble
+	} else if function == "init_marble" {      //create a new energy unit
 		return init_marble(stub, args)
-	} else if function == "set_owner" {        //change owner of a marble
+	} else if function == "set_owner" {        //change owner of a energy unit
 		return set_owner(stub, args)
-	} else if function == "init_owner"{        //create a new marble owner
+	} else if function == "init_owner"{        //create a new energy unit owner
 		return init_owner(stub, args)
-	} else if function == "read_everything"{   //read everything, (owners + marbles + companies)
+	} else if function == "read_everything"{   //read everything, (owners + energy units + companies)
 		return read_everything(stub)
-	} else if function == "getHistory"{        //read history of a marble (audit)
+	} else if function == "getHistory"{        //read history of a energy unit (audit)
 		return getHistory(stub, args)
-	} else if function == "getMarblesByRange"{ //read a bunch of marbles by start and stop id
+	} else if function == "getMarblesByRange"{ //read a bunch of energy units by start and stop id
 		return getMarblesByRange(stub, args)
 	}
 

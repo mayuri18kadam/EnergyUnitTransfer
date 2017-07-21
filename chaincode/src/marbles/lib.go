@@ -28,18 +28,18 @@ import (
 )
 
 // ============================================================================================================================
-// Get Marble - get a marble asset from ledger
+// Get energy unit - get a energy unit asset from ledger
 // ============================================================================================================================
 func get_marble(stub shim.ChaincodeStubInterface, id string) (Marble, error) {
 	var marble Marble
 	marbleAsBytes, err := stub.GetState(id)                  //getState retreives a key/value from the ledger
 	if err != nil {                                          //this seems to always succeed, even if key didn't exist
-		return marble, errors.New("Failed to find marble - " + id)
+		return marble, errors.New("Failed to find energy unit - " + id)
 	}
 	json.Unmarshal(marbleAsBytes, &marble)                   //un stringify it aka JSON.parse()
 
-	if marble.Id != id {                                     //test if marble is actually here or just nil
-		return marble, errors.New("Marble does not exist - " + id)
+	if marble.Id != id {                                     //test if energy unit is actually here or just nil
+		return marble, errors.New("energy unit does not exist - " + id)
 	}
 
 	return marble, nil

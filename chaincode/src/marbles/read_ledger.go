@@ -67,7 +67,7 @@ func read(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 }
 
 // ============================================================================================================================
-// Get everything we need (owners + marbles + companies)
+// Get everything we need (owners + energy units + companies)
 //
 // Inputs - none
 //
@@ -75,16 +75,16 @@ func read(stub shim.ChaincodeStubInterface, args []string) pb.Response {
 // {
 //	"owners": [{
 //			"id": "o99999999",
-//			"company": "United Marbles"
-//			"username": "alice"
+//			"company": "Energy Unit Systems"
+//			"username": "House 1"
 //	}],
 //	"marbles": [{
 //		"id": "m1490898165086",
 //		"color": "white",
 //		"docType" :"marble",
 //		"owner": {
-//			"company": "United Marbles"
-//			"username": "alice"
+//			"company": "Energy Unit Systems"
+//			"username": "House 1"
 //		},
 //		"size" : 35
 //	}]
@@ -97,7 +97,7 @@ func read_everything(stub shim.ChaincodeStubInterface) pb.Response {
 	}
 	var everything Everything
 
-	// ---- Get All Marbles ---- //
+	// ---- Get All energy units ---- //
 	resultsIterator, err := stub.GetStateByRange("m0", "m9999999999999999999")
 	if err != nil {
 		return shim.Error(err.Error())
@@ -110,12 +110,12 @@ func read_everything(stub shim.ChaincodeStubInterface) pb.Response {
 			return shim.Error(err.Error())
 		}
 
-		fmt.Println("on marble id - ", queryKeyAsStr)
+		fmt.Println("on energy unit id - ", queryKeyAsStr)
 		var marble Marble
 		json.Unmarshal(queryValAsBytes, &marble)                  //un stringify it aka JSON.parse()
-		everything.Marbles = append(everything.Marbles, marble)   //add this marble to the list
+		everything.Marbles = append(everything.Marbles, marble)   //add this energy unit to the list
 	}
-	fmt.Println("marble array - ", everything.Marbles)
+	fmt.Println("energy unit array - ", everything.Marbles)
 
 	// ---- Get All Owners ---- //
 	ownersIterator, err := stub.GetStateByRange("o0", "o9999999999999999999")
@@ -133,7 +133,7 @@ func read_everything(stub shim.ChaincodeStubInterface) pb.Response {
 		fmt.Println("on owner id - ", queryKeyAsStr)
 		var owner Owner
 		json.Unmarshal(queryValAsBytes, &owner)                  //un stringify it aka JSON.parse()
-		everything.Owners = append(everything.Owners, owner)     //add this marble to the list
+		everything.Owners = append(everything.Owners, owner)     //add this energy unit to the list
 	}
 	fmt.Println("owner array - ", everything.Owners)
 

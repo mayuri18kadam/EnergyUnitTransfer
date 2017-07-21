@@ -2,7 +2,7 @@
     "cred_filename": "blockchain_creds_docker.json",
     "use_events": true,
     "keep_alive_secs": 120,
-    "company": "Energy Unit Systems 3",
+    "company": "United Marbles",
     "usernames": [
         "House 7",
         "House 8",

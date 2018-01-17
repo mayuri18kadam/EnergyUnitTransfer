@@ -1,3 +1,5 @@
 # EneryUnitTransfer
 IBM Bluehack
-[Github](http://google.com)
+This is the repository for *Keerthi Pendyala*
+Course Name : Managing Software Development (CS5500)
+Course Web Page : [MSD-HomePage](https://course.ccs.neu.edu/cs5500)
